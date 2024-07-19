@@ -1,9 +1,9 @@
-import { Routes, Route } from 'react-router-dom'
-import './App.css'
-import Layout from './components/Layout/Layout'
+import Layout from "./components/Layout/Layout"
+import FindShow from "./containers/Shows/FindShow";
+import {Route, Routes} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-const App = ()=> {
+const App=()=> {
 
   return (
     <>
@@ -13,7 +13,7 @@ const App = ()=> {
             <></>
           )}/>
           <Route path="/show/:id" element={(
-            <></>
+            <FindShow></FindShow>
           )}/>
         </Routes>
       </Layout>

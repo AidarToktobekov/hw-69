@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {showReducer} from "../containers/Shows/tvShowsSlice";
+import { showByIdReducer } from '../containers/Shows/findShowSlice';
 
 
 
 export const store = configureStore({
   reducer: {
-    show: showReducer,
+    showlist: showReducer,
+    show: showByIdReducer,
   },
 });
 

@@ -11,30 +11,29 @@ interface ShowByIdState {
 }
 
 const initialState: ShowByIdState = {
-    show: {name: '',url: '',language: '', genres: [], runtime: 1, premiered: '', image: '', summary: ''},
+    show: {name: '---',url: '',language: '---', genres: ['---'], runtime: 1, image: '---', summary: '---'},
     loading: false,
     error: false,
 };
 
-export const fetchTaskShow:AsyncThunk<ShowById, string, {state:RootState}> = createAsyncThunk ('show/fetch', async (show:string) => {
+export const fetchTaskShow:AsyncThunk<ShowById, string, {state:RootState}> = createAsyncThunk ('showById/fetch', async (show:string) => {
   const response = await axiosApi.get('shows/' + show);
-  console.log(response.data);
   const tvShow:ShowById = {
     name: response.data.name,
     url: response.data.url,
     language: response.data.language,
     genres: response.data.genres,
     runtime: response.data.runtime,
-    premiered: response.data.premiered,
     image: response.data.image.original,
     summary: response.data.summary,
   }
+  console.log(tvShow);
   
-    
+
   return tvShow || [];
 }) 
-export const showSlice = createSlice({
-    name: 'show', 
+export const showByIdSlice = createSlice({
+    name: 'showById', 
     initialState,  
     reducers: {},
     extraReducers: (builder) => {
@@ -54,6 +53,6 @@ export const showSlice = createSlice({
     }
 });
     
-export const showByIdReducer = showSlice.reducer;
-
+export const showByIdReducer = showByIdSlice.reducer;
+export const showLoading = (state: RootState) => state.show.loading;
 

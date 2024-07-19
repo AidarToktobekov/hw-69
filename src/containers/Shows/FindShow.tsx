@@ -2,30 +2,45 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "../../app/store";
 import { useEffect } from "react";
-import { fetchTaskShow } from "./findShowSlice";
+import { fetchTaskShow, showLoading } from "./findShowSlice";
+import Loader from "../../components/loader/Loader";
 
 const FindShow = () => {
 
   const param = useParams();
   console.log(param.id);
   const dispatch: AppDispatch = useDispatch();
+  const loader = useSelector(showLoading);
   const show = useSelector((state: RootState) => state.show.show);
   useEffect(()=>{
-    dispatch(fetchTaskShow(String(param.id)))
-  },[])
-  console.log(show);
-    
+    dispatch(fetchTaskShow(String(param.id)));
+  },[param.id])
+
 
   return (
     <>
-    <div className="card" style={{width: '400px'}}>
-      <img src="" className="card-img-top" alt="..."/>
+    {loader ? <Loader/> :<div className="card mx-auto flex-row" style={{maxWidth: '800px'}}>
+      <img src={show.image} className="card-img-top" style={{maxWidth: '400px'}} alt="..."/>
       <div className="card-body">
-        <h5 className="card-title">Card title</h5>
-        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" className="btn btn-primary">Go somewhere</a>
+        <h5 className="card-title">{show.name}</h5>
+        <span>Genres: {show.genres.map((genre , index)=>{
+          if (index > 0) {       
+            return(
+              <span key={index}>, {genre}</span>
+            )
+          }
+          else {       
+            return(
+              <span key={index}>{genre}</span>
+            )
+          }
+        })}</span>
+        <span className="d-block">Language: {show.language}</span>
+        <span className="d-block">Runtime: {show.runtime}</span>
+        <p className="card-textm mt-2" dangerouslySetInnerHTML={{ __html: show.summary}}></p>
+        <a href={show.url} className="btn btn-dark">Watch</a>
       </div>
-    </div>
+    </div>}
     </>
   );
 

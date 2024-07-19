@@ -7,6 +7,8 @@ import { NavLink } from "react-router-dom";
 const Form = ()=>{
     const dispatch: AppDispatch = useDispatch();
     const showList = useSelector((state: RootState) => state.showlist.showList);
+    console.log(showList);
+    
     
     useEffect(()=>{
         dispatch(fetchTaskShowsList(''));

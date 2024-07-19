@@ -9,7 +9,6 @@ export interface ShowById{
     language: string;
     genres: string[];
     runtime: number;
-    premiered: string;
     image: string;
     summary: string;
 }

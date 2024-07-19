@@ -29,21 +29,7 @@ export const fetchTaskShowsList:AsyncThunk<Show[], string, {state:RootState}> = 
     
     return showList || [];
 }) 
-// export const fetchTaskShow:AsyncThunk<ShowById, string, {state:RootState}> = createAsyncThunk ('show/fetch', async (show:string) => {
-//   const response = await axiosApi.get('shows/' + show);
-//   const tvShow:ShowById = {
-//     name: response.data.name,
-//     url: response.data.url,
-//     language: response.data.language,
-//     genres: response.data.genres,
-//     runtime: response.data.runtime,
-//     premiered: response.data.premiered,
-//     image: response.data.image.original,
-//     summary: response.data.summary,
-//   }
-    
-//   return tvShow || [];
-// }) 
+
 export const showSlice = createSlice({
     name: 'show', 
     initialState,  
